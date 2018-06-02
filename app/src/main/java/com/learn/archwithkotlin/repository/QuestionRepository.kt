@@ -15,18 +15,16 @@ import retrofit2.Response
 object QuestionRepository {
     private var questionDao: QuestionDao? = null
 
-
-    fun getQuestionsMovies(questions: MutableLiveData<List<QuestionModel>>, error: MutableLiveData<String>, app: Application) {
-        val db = QuestionsDataBase.getInstance(app)
+    fun getQuestions(questions: MutableLiveData<List<QuestionModel>>, error: MutableLiveData<String>, application: Application) {
+        val db = QuestionsDataBase.getInstance(application)
         questionDao = db?.questionDao()
-        val queationsList = questionDao?.loadQuestions()
+        val questionsList = questionDao?.loadQuestions()
 
-        if (queationsList != null && !queationsList.isEmpty()) {
-            questions?.value = queationsList
+        if (questionsList != null && !questionsList.isEmpty()) {
+            questions?.value = questionsList
             return
         }
-
-        return executeRequest(ApiConnection.getRetrofitCall().create(ApiRetrofit::class.java).getQuestions(), questions, error)
+        executeRequest(ApiConnection.getRetrofitCall().create(ApiRetrofit::class.java).getQuestions(), questions, error)
     }
 
     private fun executeRequest(questionsCall: Call<List<QuestionModel>>, questions: MutableLiveData<List<QuestionModel>>, error: MutableLiveData<String>) {
@@ -42,7 +40,6 @@ object QuestionRepository {
                 } else {
                     error.value = "error"
                 }
-
             }
         })
     }

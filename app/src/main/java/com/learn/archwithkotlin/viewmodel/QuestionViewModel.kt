@@ -11,13 +11,8 @@ class QuestionViewModel(application: Application) : AndroidViewModel(application
 
     lateinit var questions: MutableLiveData<List<QuestionModel>>
     lateinit var error: MutableLiveData<String>
-    var questionRepo: QuestionRepository
-    var app: Application
-
-    init {
-        questionRepo = QuestionRepository
-        app = application
-    }
+    var questionRepo: QuestionRepository = QuestionRepository
+    var app: Application = application
 
     fun initObservers() {
         questions = MutableLiveData()
@@ -25,8 +20,7 @@ class QuestionViewModel(application: Application) : AndroidViewModel(application
     }
 
     fun getQuestionsList() {
-        questionRepo.getQuestionsMovies(questions, error, app)
+        questionRepo.getQuestions(questions, error, app)
     }
-
 
 }

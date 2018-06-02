@@ -24,7 +24,7 @@ class QuestionsAdapter( val context: Context,val questions: List<QuestionModel>?
         holder.choiceATextView.text = question?.optA
         holder.choiceBTextView.text = question?.optB
         holder.choiceCTextView.text = question?.optC
-        holder.answer.text = question?.answer
+        holder.answerTextView.text = question?.answer
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -32,8 +32,7 @@ class QuestionsAdapter( val context: Context,val questions: List<QuestionModel>?
         val choiceATextView = view.choiceATextView
         val choiceBTextView = view.choiceBTextView
         val choiceCTextView = view.choiceCTextView
-        val answer = view.answerTextView
-
+        val answerTextView = view.answerTextView
     }
 
 }
