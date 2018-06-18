@@ -1,17 +1,18 @@
 package com.learn.archwithkotlin.view
 
 import android.content.Context
+import android.databinding.DataBindingUtil
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import com.learn.archwithkotlin.R
+import com.learn.archwithkotlin.databinding.QuestionItemBinding
 import com.learn.archwithkotlin.model.QuestionModel
-import kotlinx.android.synthetic.main.question_item.view.*
 
-class QuestionsAdapter( val context: Context,val questions: List<QuestionModel>?) : RecyclerView.Adapter<QuestionsAdapter.ViewHolder>() {
+class QuestionsAdapter(val context: Context, val questions: List<QuestionModel>?) : RecyclerView.Adapter<QuestionsAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-      return ViewHolder(LayoutInflater.from(context).inflate(R.layout.question_item, parent, false))
+        val binding: QuestionItemBinding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.question_item, parent, false);
+        return ViewHolder(binding)
     }
 
     override fun getItemCount(): Int {
@@ -20,20 +21,11 @@ class QuestionsAdapter( val context: Context,val questions: List<QuestionModel>?
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val question = questions?.get(position)
-        holder.questions.text = question?.question
-        holder.choiceATextView.text = question?.optA
-        holder.choiceBTextView.text = question?.optB
-        holder.choiceCTextView.text = question?.optC
-        holder.answerTextView.text = question?.answer
+        holder.binding.questionItem = question
+        holder.binding.executePendingBindings()
     }
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val questions = view.questionTextView
-        val choiceATextView = view.choiceATextView
-        val choiceBTextView = view.choiceBTextView
-        val choiceCTextView = view.choiceCTextView
-        val answerTextView = view.answerTextView
-    }
+    class ViewHolder(val binding: QuestionItemBinding) : RecyclerView.ViewHolder(binding.root)
 
 }
 
