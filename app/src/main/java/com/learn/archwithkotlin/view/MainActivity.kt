@@ -4,11 +4,11 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.widget.Toast
 import com.learn.archwithkotlin.R
 import com.learn.archwithkotlin.model.QuestionModel
 import com.learn.archwithkotlin.viewmodel.QuestionViewModel
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.longToast
 
 
 class MainActivity : AppCompatActivity() {
@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
             recyclerViewQuestions.adapter = QuestionsAdapter(this, it)
         }
         val errorObserver = Observer<String> {
-            Toast.makeText(this, it, Toast.LENGTH_LONG).show()
+            it?.let { errorMessage -> longToast(errorMessage) }
         }
         viewModel.initObservers()
         viewModel.questions.observe(this, questionsObserver)

@@ -13,8 +13,8 @@ abstract class QuestionsDataBase : RoomDatabase() {
         private var INSTANCE: QuestionsDataBase? = null
         fun getInstance(context: Context): QuestionsDataBase? {
             if (INSTANCE == null) {
-                INSTANCE = Room.databaseBuilder(context.applicationContext, QuestionsDataBase::class.java!!, "question.db")
-                        .allowMainThreadQueries().build();
+                INSTANCE = Room.databaseBuilder(context.applicationContext, QuestionsDataBase::class.java, "question.db")
+                .build()
             }
             return INSTANCE
         }

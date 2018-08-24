@@ -32,6 +32,7 @@ dependencies {
     def lifecycle_version = "1.1.1"
     def room_version = "1.1.0"
     def appcompat_version = "28.0.0-alpha3"
+    def anko_version = "0.10.4"
 
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -44,7 +45,8 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.4'
     implementation "android.arch.lifecycle:extensions:$lifecycle_version"
     implementation "android.arch.persistence.room:runtime:$room_version"
-    implementation 'android.arch.work:work-runtime-ktx:1.0.0-alpha02'
+    implementation "org.jetbrains.anko:anko-coroutines:$anko_version"
+    implementation "org.jetbrains.anko:anko-commons:$anko_version"
     kapt "android.arch.persistence.room:compiler:$room_version"
     kapt "com.android.databinding:compiler:$android_plugin"
     testImplementation 'junit:junit:4.12'
@@ -52,4 +54,9 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
+}
+kotlin {
+    experimental {
+        coroutines "enable"
+    }
 }
